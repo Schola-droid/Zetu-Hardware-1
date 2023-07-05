@@ -1,5 +1,6 @@
 import './App.css';
 import React, {useEffect, useState} from "react"
+import { Route,Routes } from 'react-router';
 import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/SignUp';
@@ -18,10 +19,11 @@ function App() {
   
   return (
     <div>
-      {/* <Login/> */}
-      <Home data = {hardwares}/>
-      {/* <Signup/> */}
-     
+      <Routes>
+        <Route path='/login' element={<Login/>}></Route>
+        <Route path='/' element={<Home data = {hardwares}/>}></Route>
+        <Route path='/signup' element={<Signup />}></Route>
+      </Routes>     
     </div>
   );
 }

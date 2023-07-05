@@ -1,14 +1,20 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const HardwareItem = ({ name, price, description,category }) => {
     // console.log(name)
     return (
-        <div>
+        <div className="card">
             {/* <img src={image} alt={name}/> */}
-            <p>{name}</p>
-            <p>Kshs. {price}</p>
-            <p>{description}</p>
-            <p>{category}</p>
+            <div className="container">
+                <p>{name}</p>
+                <p>Kshs. {price}</p>
+                <Link>Show more</Link>
+                
+
+            </div>
+           
+            
         </div>
     )
 

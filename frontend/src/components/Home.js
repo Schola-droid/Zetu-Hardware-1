@@ -7,7 +7,9 @@ const Home = ({data}) => {
             hardware.map(item => {
                 // console.log(item)
                 hardwarelist.push(item)
+                return hardwarelist
             })
+            return hardware
     })
     // console.log(hardwarelist)
     const displayData = hardwarelist.map(item => {
@@ -15,7 +17,7 @@ const Home = ({data}) => {
         return <HardwareItem key = {item.id} name = {item.name} price = {item.price} description ={item.description} category = {item.category}  />
     })
     return(
-        <div>
+        <div className="cardlist">
             {displayData}
         </div>
     )

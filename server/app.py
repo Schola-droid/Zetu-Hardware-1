@@ -112,6 +112,51 @@ def get_manufacturer(manufacturer_id):
     }
     return jsonify(manufacturer=manufacturer_data)
 
+#POST ROUTES
+@app.route("/addhardwares", methods = ["POST"])
+def post_hardware():
+    data = request.get_json()
+    new_hardware = Hardware(
+        customer_id = data["customer_id"],
+        manufacturer_id = data["manufacturer_id"],
+        name = data["name"],
+        description = data["description"],
+        price = data["price"],
+        category=data["category"],
+    )
+    db.session.add(new_hardware)
+    db.session.commit()
+    return make_response(jsonify({"message":"Hardware added successfully"}))
+
+@app.route("/addcustomers", methods = ["POST"])
+def post_customer():
+    data = request.get_json()
+    new_customer = Customer(
+        firstname = data["firstname"],
+        lastname = data["lastname"],
+        email = data["email"],
+        phone = data["phone"],
+        password = data["password"]
+    )
+    db.session.add(new_customer)
+    db.session.commit()
+    return make_response(jsonify({"message":"Customer added successfully"}))
+
+@app.route("/addmanufacturer", methods = ["POST"])
+def post_manufacturer():
+    data = request.get_json()
+    new_manufacturer = Manufacturer(
+        firstname = data["firstname"],
+        lastname = data["lastname"],
+        email = data["email"],
+        phone = data["phone"],
+        password = data["password"]
+    )
+    db.session.add(new_manufacturer)
+    db.session.commit()
+    return make_response(jsonify({"message":"Manufacturer added successfully"}))
+
+
 
 # PATCH ROUTES
 
@@ -187,7 +232,7 @@ def update_manufacturer(manufacturer_id):
 
 @app.route('/customers/<int:customer_id>', methods=['DELETE'])
 def delete_customer(customer_id):
-    customer = Customer.query.get(customer_id)
+    customer = Customer.query.filter_by(id = customer_id).first()
 
     if not customer:
         return jsonify(message='Customer not found'), 404
@@ -215,7 +260,7 @@ def delete_hardware(hardware_id):
 
 @app.route('/manufacturers/<int:manufacturer_id>', methods=['DELETE'])
 def delete_manufacturer(manufacturer_id):
-    manufacturer = Manufacturer.query.get_or_404(manufacturer_id)
+    manufacturer = Manufacturer.query.filter_by(id = manufacturer_id).first()
 
     hardware_delete_result = Hardware.query.filter_by(manufacturer_id=manufacturer_id).delete()
     if hardware_delete_result > 0:

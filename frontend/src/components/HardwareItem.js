@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const HardwareItem = ({ name, price, description,category }) => {
+const HardwareItem = ({id, name, price }) => {
     // console.log(name)
     return (
         <div className="card">
@@ -9,12 +9,8 @@ const HardwareItem = ({ name, price, description,category }) => {
             <div className="container">
                 <p>{name}</p>
                 <p>Kshs. {price}</p>
-                <Link>Show more</Link>
-                
-
-            </div>
-           
-            
+                <Link to={`/hardware/${id}`}>Show more</Link>
+            </div>          
         </div>
     )
 

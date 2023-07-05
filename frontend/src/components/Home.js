@@ -14,7 +14,7 @@ const Home = ({data}) => {
     // console.log(hardwarelist)
     const displayData = hardwarelist.map(item => {
         // console.log(item)
-        return <HardwareItem key = {item.id} name = {item.name} price = {item.price} description ={item.description} category = {item.category}  />
+        return <HardwareItem key = {item.id} id = {item.id} name = {item.name} price = {item.price} />
     })
     return(
         <div className="cardlist">

@@ -65,6 +65,8 @@ def post_customer():
 
 
 
+
+
 # Hardware routes
 
 @app.route('/hardware', methods=['GET'])

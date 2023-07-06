@@ -29,8 +29,10 @@ const Login = () =>{
     })
     return(
         <form onSubmit={formik.handleSubmit}>
-           
+            <h3 style={{textAlign:"center"}}>login</h3>
+           <label>email</label>
             <input type="text" id = "email" value = {formik.values.email} onChange={formik.handleChange}/>
+            <label>password</label>
             <input type="password" id = "password" value = {formik.values.password} onChange={formik.handleChange}/>
             <button type="submit">Submit</button>
 

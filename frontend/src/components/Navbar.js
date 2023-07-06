@@ -8,6 +8,7 @@ const NavBar = () => {
             <NavLink>Logout</NavLink>
             <NavLink to="/login" >Login</NavLink>
             <NavLink to="/signup">SignUp</NavLink>
+            <NavLink to="/admin">Admin</NavLink>
         </nav>
     )
 

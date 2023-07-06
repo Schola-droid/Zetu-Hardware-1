@@ -5,7 +5,9 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/SignUp';
 import NavBar from './components/Navbar';
+import EditProduct from './components/EditProduct';
 import DetailsPage from './components/DetailsPage';
+import Main from './admin/Main';
 
 function App() {
   const [hardwares, setHardwares] = useState([])
@@ -27,7 +29,11 @@ function App() {
         <Route path='/hardware' element={<Home data = {hardwares}/>}></Route>
         <Route path='/hardware/:id' element={<DetailsPage/>}></Route>
         <Route path='/signup' element={<Signup />}></Route>
-      </Routes>     
+        <Route path='/editproduct/:id' element = {<EditProduct />}></Route>
+        <Route path='/admin' element = {<Main /> }></Route>
+      </Routes>
+      {/* <Admin />  */}
+
     </div>
   );
 }

@@ -64,7 +64,8 @@ def get_hardware():
             'name': item.name,
             'description': item.description,
             'price': item.price,
-            'category': item.category
+            'category': item.category,
+            'image':item.image
         }
         hardware_list.append(hardware_data)
     return jsonify(hardware=hardware_list)
@@ -79,7 +80,8 @@ def get_hardware_item(hardware_id):
         'name': item.name,
         'description': item.description,
         'price': item.price,
-        'category': item.category
+        'category': item.category,
+        'image':item.image
     }
     return jsonify(hardware=hardware_data)
 
@@ -123,6 +125,7 @@ def post_hardware():
         description = data["description"],
         price = data["price"],
         category=data["category"],
+        image = data["image"]
     )
     db.session.add(new_hardware)
     db.session.commit()
@@ -201,6 +204,8 @@ def update_hardware(item_id):
         hardware.price = updated_data['price']
     if 'category' in updated_data:
         hardware.category = updated_data['category']
+    if 'image' in updated_data:
+        hardware.image = updated_data['image']
 
     db.session.commit()
 

@@ -18,8 +18,10 @@ class Hardware(db.Model, SerializerMixin):
     __tablename__ = 'hardwares'
 
     id = db.Column(db.Integer, primary_key=True)
+    image = db.Column(db.String(255))
     customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'), nullable=False)
     manufacturer_id = db.Column(db.Integer, db.ForeignKey('manufacturer.id'), nullable=False)
+    # sales_id = db.Column(db.Integer, db.ForeignKey('sales.id'), nullable=False)
     name = db.Column(db.String(255))
     description = db.Column(db.String(255))
     price = db.Column(db.Integer)
@@ -35,3 +37,5 @@ class Manufacturer(db.Model, SerializerMixin):
     phone = db.Column(db.String(10))
     password = db.Column(db.String(255))
     hardware = db.relationship('Hardware', backref='manufacturer', lazy=True)
+
+

@@ -1,5 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_serializer import SerializerMixin
+from sqlalchemy.orm import validates
+
 
 db = SQLAlchemy()
 
@@ -21,7 +23,6 @@ class Hardware(db.Model, SerializerMixin):
     image = db.Column(db.String(255))
     customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'), nullable=False)
     manufacturer_id = db.Column(db.Integer, db.ForeignKey('manufacturer.id'), nullable=False)
-    # sales_id = db.Column(db.Integer, db.ForeignKey('sales.id'), nullable=False)
     name = db.Column(db.String(255))
     description = db.Column(db.String(255))
     price = db.Column(db.Integer)
@@ -39,3 +40,21 @@ class Manufacturer(db.Model, SerializerMixin):
     hardware = db.relationship('Hardware', backref='manufacturer', lazy=True)
 
 
+@validates("email")
+def validate_email(self, key, value):
+    if '@' not in value:
+            raise ValueError("failed simple email validation")
+    return value
+
+@validates("phone")
+def validate_phone(self, key, value):
+    if not len(value) <= 10:
+         raise ValueError("incorrect phone number")
+    return value
+
+@validates("firstname", "lastname")
+def validate_name(self, key, value):
+     if not len(value) <= 20:
+          raise ValueError("long name")
+     return value
+         

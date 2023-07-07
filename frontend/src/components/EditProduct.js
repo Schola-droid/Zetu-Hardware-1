@@ -1,61 +1,40 @@
 import React, {useState}from "react";
-import * as yup from "yup"
-import { useFormik } from 'formik';
 import { useParams } from "react-router-dom";
-const EditProduct = () =>{
-    const [refreshPage, setRefreshPage] = useState(false);
-    const { id } = useParams()
-    const formSchema = yup.object().shape({
-        name:yup.string().max(20).required("Must enter name"),
-        price:yup.number().max(10).required("Must enter price"),
-        image:yup.string().max(20).required("enter image"),
-        category:yup.string().max(20).required("enter category"),
-        description:yup.string().max(20).required("Must enter description"),
-        customer_id:yup.number().max(10).required("Must enter phone").positive(),
-        manufacturer_id:yup.number().max(20).required("Must enter manufacturer id")
-    })
-    console.log(id)
-    const formik = useFormik({
-        initialValues:{
-            name:"",
-            price:1,
-            description:"",
-            customer_id:1,
-            manufacturer_id:1,
-            image:"",
-            category:""
-        },
-        validationSchema:formSchema,onSubmit:(values) => {
-            fetch(`/hardware/${id}`,{
-                method:"PATCH",
-                headers:{"Content-Type":"application/json",},
-                body:JSON.stringify(values, null, 2),
 
-            })
-            .then(res =>{
-                if (res.status === 200){
-                    setRefreshPage(!refreshPage)
-                }
-            })
-        }
-    })
+const EditProduct = ({editProduct}) =>{
+    const { id } = useParams()
+
+    const [name, setName] = useState("")
+    const [category, setCategory] = useState("")
+    const [image, setImage] = useState("")
+    const [price, setPrice] = useState("")
+    const [description, setDescription] = useState("")
+    const [customer_id, setCustomerID] = useState("")
+    const [manufacturer_id, setManufacturerID] = useState("")
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        editProduct(id, name, category,image, price, description,customer_id,manufacturer_id)
+    }
+   
+    
     return(
-        <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <h3 style={{textAlign:"center"}}>Edit Product</h3>
             <label>name</label>
-            <input type="text" id = "name" value = {formik.values.name} onChange={formik.handleChange}/>
+            <input type="text" id = "name" value = {name} onChange={e => setName(e.target.value)}/>
             <label>category</label>
-            <input type="text" id = "category" value = {formik.values.category} onChange={formik.handleChange}/>
+            <input type="text" id = "category" value = {category} onChange={e => setCategory(e.target.value)}/>
             <label>image</label>
-            <input type="text" id = "image" value = {formik.values.image} onChange={formik.handleChange}/>
+            <input type="text" id = "image" value = {image} onChange={e => setImage(e.target.value)}/>
             <label>price</label>
-            <input type="text" id = "price" value = {formik.values.price} onChange={formik.handleChange}/>
+            <input type="text" id = "price" value = {price} onChange={e => setPrice(e.target.value)}/>
             <label>description</label>
-            <input type="text" id = "description" value = {formik.values.description} onChange={formik.handleChange}/>
+            <input type="text" id = "description" value = {description} onChange={e => setDescription(e.target.value)}/>
             <label>customer_id</label>
-            <input type="text" id = "customer_id" value = {formik.values.customer_id} onChange={formik.handleChange}/>
+            <input type="text" id = "customer_id" value = {customer_id} onChange={e => setCustomerID(e.target.value)}/>
             <label>manufacturer_id</label>
-            <input type="text" id = "manufacturer_id" value = {formik.values.manufacturer_id} onChange={formik.handleChange}/>
+            <input type="text" id = "manufacturer_id" value = {manufacturer_id} onChange={e => setManufacturerID(e.target.value)}/>
             <button type="submit">Submit</button>
 
         </form>

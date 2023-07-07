@@ -58,6 +58,25 @@ function App() {
         res.json()})
       .then(data => console.log(data))
   }
+
+  const editProduct = (id, name, category,image, price, description,customer_id,manufacturer_id) =>{
+    fetch(`/hardware/${id}`, {
+      method: 'PATCH',
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, category,image, price, description,customer_id,manufacturer_id }),
+      })
+      .then(res => {
+        if (res.status === 200){
+          navigate('/hardware')
+
+        }
+        res.json()})
+      .then(data => console.log(data))
+
+  }
   return (
     <div>
       <NavBar/>
@@ -66,7 +85,7 @@ function App() {
         <Route path='/hardware' element={<Home data = {hardwares}/>}></Route>
         <Route path='/hardware/:id' element={<DetailsPage/>}></Route>
         <Route path='/signup' element={<Signup signupuser={signupuseruser}/>}></Route>
-        <Route path='/editproduct/:id' element = {<EditProduct />}></Route>
+        <Route path='/editproduct/:id' element = {<EditProduct editProduct={editProduct} />}></Route>
         <Route path='/admin' element = {<Main /> }></Route>
         <Route path='/logout' element = {<Logout />}></Route>
       </Routes>

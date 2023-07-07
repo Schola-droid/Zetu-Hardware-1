@@ -8,8 +8,11 @@ import NavBar from './components/Navbar';
 import EditProduct from './components/EditProduct';
 import DetailsPage from './components/DetailsPage';
 import Main from './admin/Main';
+import { useNavigate } from 'react-router-dom';
+import Logout from './components/Logout';
 
 function App() {
+  const navigate = useNavigate()
   const [hardwares, setHardwares] = useState([])
   useEffect(() => {
     fetch("/hardware")
@@ -29,7 +32,12 @@ function App() {
       },
       body: JSON.stringify({ email, password }),
       })
-      .then(res => res.json())
+      .then(res => {
+        if (res.status === 200){
+          navigate('/hardware')
+
+        }
+        res.json()})
       .then(data => console.log(data))
   }
   
@@ -42,7 +50,12 @@ function App() {
       },
       body: JSON.stringify({ firstname, lastname, email, phone,password }),
       })
-      .then(res => res.json())
+      .then(res => {
+        if (res.status === 200){
+          navigate('/login')
+
+        }
+        res.json()})
       .then(data => console.log(data))
   }
   return (
@@ -55,6 +68,7 @@ function App() {
         <Route path='/signup' element={<Signup signupuser={signupuseruser}/>}></Route>
         <Route path='/editproduct/:id' element = {<EditProduct />}></Route>
         <Route path='/admin' element = {<Main /> }></Route>
+        <Route path='/logout' element = {<Logout />}></Route>
       </Routes>
     </div>
   );

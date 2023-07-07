@@ -9,7 +9,7 @@ const Signup = ({signupuser}) =>{
     const handleSubmit = (e) => {
         e.preventDefault()
         signupuser(firstname, lastname, email, phone, password)
-    
+    }
     return(
         <form onSubmit={handleSubmit}>
             <h3 style={{textAlign:"center"}}>Sign up</h3>
@@ -26,7 +26,8 @@ const Signup = ({signupuser}) =>{
             <button type="submit">Submit</button>
 
         </form>
+        // <h2>header</h2>
     )
-}}
+}
 
 export default Signup

@@ -86,7 +86,18 @@ const Dashboard = ({users}) => {
                 </div>
             </div>
             </div>
-            {displayData}
+            <table id = "home">
+                <tr>
+                    <th>firstname</th>
+                    <th>lastname</th>
+                    <th>email</th>
+                    <th>phone</th>
+                </tr>
+                <tr>
+                    {displayData}
+                </tr>
+            </table>
+            
             </section>
             </div>
 

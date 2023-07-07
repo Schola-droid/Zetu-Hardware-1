@@ -6,6 +6,8 @@ const Login = ({loginuser}) =>{
     const handleSubmit = (e) => {
         e.preventDefault()
         loginuser(email, password)
+        
+    }
     return(
         <form onSubmit={handleSubmit}>
             <h3 style={{textAlign:"center"}}>login</h3>
@@ -18,6 +20,6 @@ const Login = ({loginuser}) =>{
         </form>
     )
 
-}}
+}
 
 export default Login

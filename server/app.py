@@ -41,12 +41,6 @@ def login():
 
 @app.route('/signup', methods=['POST'])
 def signup():
-    # if 'email' in request.json and 'password' in request.json:
-    #     email = request.json['email']
-    #     existing_user = Customer.query.filter_by(email=email).first()
-    #     if existing_user:
-    #         return jsonify({'message': 'Username already exists'})
-    #     else:
     data = request.get_json()
     password = data['password']
     hashed_password = bcrypt.generate_password_hash(password)
@@ -60,10 +54,7 @@ def signup():
     )
     db.session.add(new_user)
     db.session.commit()
-    # db.session['id'] = new_user.id
     return jsonify({'message': 'Registration Successful'})
-    # else:
-    #     return jsonify({'message': 'Missing username or password'})
     
 @app.route('/logout', methods=['POST'])
 def logout():
